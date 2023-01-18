@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complexforms</title>
+    <style>
+        .required {
+            color: #ff0000;
+        }
+
+        .break,
+        .inline {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .break label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .break input {
+            font-size: 15px;
+        }
+
+        .grey tr {
+            border-bottom: 1px solid #cdcdce;
+        }
+
+        .grey tr:first-child {
+            border-top: 1px solid #cdcdce;
+        }
+
+        .grey tr:nth-child(odd) {
+            background-color: #f0eff0;
+        }
+
+        .grey tr:nth-child(even) {
+            background-color: #e0dfe0;
+        }
+
+        #table_main {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        #table_main tr td:nth-child(2) {
+            width: 252px;
+        }
+
+        #table_main tr td:nth-child(3) {
+            width: 300px;
+        }
+
+        #table_main td .inline {
+            margin-right: 10px;
+        }
+
+        #table_main td input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        #table_main td input[type="checkbox"]+label {
+            width: 120px;
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        .check {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input--margin {
+            margin: 5px 30px 5px 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="break">
+            <label for="title">Title: <span class="required">*</span></label>
+            <input name="title" type="text" required style="width: 550px;" value="Astronomy for Poets">
+        </div>
+        <div class="break">
+            <label for="short_title">Short Title: <span class="required">*</span></label>
+            <input name="short_title" type="text" required style="width: 300px;" value="Astr. for Poets">
+        </div>
+        <div class="break">
+            <label>Subj.:</label>
+            <sup>BLST</sup>
+        </div>
+        <div class="break">
+            <label for="number">Num.:</label>
+            <input name="number" type="text" style="width: 40px;" value="10">
+        </div>
+        <div class="break">
+            <label for="section">Section:</label>
+            <input name="section" type="text" style="width: 50px;" value="01">
+        </div>
+        <div class="break">
+            <label>Year:</label>
+            <sup>0910</sup>
+        </div>
+        <p></p> <!-- seperator -->
+        <table id="table_main" class="grey">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="inline">
+                            <input type="checkbox" name="enrollment">
+                            <label for="enrollment">Enrollment<br>limit</label>
+                        </div>
+                        <div class="break">
+                            <label for="number">Num.:</label>
+                            <input name="number" type="text" style="width: 40px;">
+                        </div>
+                        <div class="break">
+                            <label for="en_rationale">Rationale:</label>
+                            <input name="en_rationale" type="text" style="width: 570px;">
+                        </div>
+                    </td>
+                    <td rowspan="4" style="position: relative;">
+                        <div style="position: absolute; top: 0;">
+                            <div class="break">
+                                <label for=" class_meetings">Class Mettings/Week:</label>
+                                <input name="class_meetings" type="number" value="1" style="width: 50px;">
+                            </div>
+                            <div class="break" style="margin-top: 10px;">
+                                <label for="class_hours">Class Hours/Week:</label>
+                                <input name="class_hours" type="number" value="0" style="width: 50px;">
+                            </div>
+                            <div class="break" style="margin-top: 10px;">
+                                <label for="semester_offered">Semester(s) Offered:</label>
+                                <select id="semester_offered">
+                                    <option value="0">- None -</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <label class="check">
+                                    <input type="checkbox" id="inc_sem_pre" checked>Incl. semester in prereqs.
+                                </label>
+                                <label class="check">
+                                    <input type="checkbox" id="offer_once">Offered only once
+                                </label>
+                                <label class="check">
+                                    <input type="checkbox" id="inc_printed">Incl. in printed catalog
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                    <td rowspan="4" style="position: relative;">
+                        <div style="position: absolute; top: 0;">
+                            <label for="keywords" style="display: block; margin-bottom: 10px;"><b>Keywords:</b></label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="science_nm">Science for non-majors
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="arts_nm">Fine arts for non-majors
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="science_lab">Lab science course
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="arts_practice">Artistic practice
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="forg_lang">Foreign language/culture taught
+                                in English
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="com_learning">Community based learning
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="writing_att">Writing attentive
+                            </label>
+                            <label class="check">
+                                <input type="checkbox" name="keywords" value="writing_int">Writing intensive
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="inline">
+                            <input type="checkbox" name="consent" required>
+                            <label for="consent">Consent<br>required</label>
+                        </div>
+                        <div style="display: inline-block; width: 44px; height: 51px; margin-right: 10px;"></div>
+                        <div class="break">
+                            <label for="cnst_rationale">Rationale:</label>
+                            <input name="cnst_rationale" type="text" style="width: 570px;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="inline">
+                            <input type="checkbox" name="limit" required>
+                            <label for="limit">Limit class<br>level</label>
+                        </div>
+                        <div class="break">
+                            <label for="number">Code:</label>
+                            <input name="number" type="text" style="width: 40px;">
+                        </div>
+                        <div class="break">
+                            <label for="code_rationale">Rationale:</label>
+                            <input name="code_rationale" type="text" style="width: 570px;">
+                        </div>
+                        <div class="break" style="display: block; margin-top: 10px; margin-left: 225px;">
+                            <label for="over_enroll">How to handle over-enrollment:</label>
+                            <input name="over_enroll" type="text" style="width: 570px;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="inline">
+                            <input type="checkbox" name="prerequisite" required>
+                            <label for="prerequisite">Prerequisite</label>
+                        </div>
+                        <div style="display: inline-block; width: 44px; height: 51px; margin-right: 10px;"></div>
+                        <div class="break">
+                            <label for="pre_rationale">Rationale:</label>
+                            <input name="pre_rationale" type="text" style="width: 570px;">
+                        </div>
+                        <div class="break" style="display: block; margin-top: 10px; margin-left: 225px;">
+                            <label for="required_pre">Required Prereqs. (major, course):</label>
+                            <input name="required_pre" type="text" style="width: 570px;">
+                        </div>
+                        <div class="break" style="display: block; margin-top: 10px; margin-left: 225px;">
+                            <label for="rec_pre">Recommended Prereqs.:</label>
+                            <input name="rec_pre" type="text" style="width: 570px;">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p></p> <!-- seperator -->
+        <table>
+            <thead>
+                <tr style="text-align: left;">
+                    <th>Approvals:</th>
+                    <th>Date:</th>
+                    <th>Comment:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="check">
+                            <input type="checkbox" name="approvals" value="cep">CEP
+                        </label>
+                        <label class="check">
+                            <input type="checkbox" name="approvals" value="cos">Committe of Six
+                        </label>
+                        <label class="check">
+                            <input type="checkbox" name="approvals" value="fac">Faculty
+                        </label>
+                    </td>
+                    <td>
+                        <table class="grey" id="table_date">
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="date" class="input--margin"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="date" class="input--margin"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="date" class="input--margin"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="grey">
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="comment" class="input--margin"
+                                            style="width: 700px; margin-right: 5px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="comment" class="input--margin"
+                                            style="width: 700px; margin-right: 5px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="comment" class="input--margin"
+                                            style="width: 700px; margin-right: 5px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>
