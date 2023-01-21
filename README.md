@@ -6,5 +6,5 @@ This is a repository to submit assignments and other projects done during the bo
 
 ### Assignments:
 
-- [Recreate complexform](./assign1/)
-- [Clone Elie's repo](./assign2/)
+- [Assign1: Recreate complexform](./assign1/)
+- [Assign2: Clone Elie's repo](./assign2/)
