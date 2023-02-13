@@ -12,7 +12,7 @@ class GameController {
     monsterHealth;
     damageRange;
 
-    constructor(damageRange = { min: 1, max: 20 }) {
+    constructor(damageRange = { min: 5, max: 20 }) {
         this.damageRange = damageRange;
         this.monsterHealth = document.querySelector("#monster-health");
         this.playerHealth = document.querySelector("#player-health");
