@@ -150,7 +150,7 @@ class GameController {
     }
 }
 
-controller = new GameController();
+let controller = new GameController();
 
 document
     .querySelectorAll(".action-btn")
