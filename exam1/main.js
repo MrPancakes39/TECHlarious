@@ -62,6 +62,7 @@ class GameController {
             case "give-up":
                 break;
         }
+        this.doAttack("monster");
         this.checkWinner();
     }
 
@@ -72,8 +73,6 @@ class GameController {
         const message = this.logMessage(type, "attacks and deals", damage, false);
         this.setHealth(opponentType, opponentHealth - damage);
         battleLog.prepend(html(`<p>${message}</p>`));
-
-        if (type === "player") this.doAttack("monster");
     }
 
     doSpecial() {
@@ -86,8 +85,6 @@ class GameController {
             const message = this.logMessage("player", "attacks and deals", damage, false);
             this.setHealth("monster", currentMonsterHealth - damage);
             battleLog.prepend(html(`<p>${message}</p>`));
-
-            this.doAttack("monster");
         } else {
             battleLog.prepend(html(`<p>You can't use the special attack, it's for emergencies.</p>`));
         }
@@ -114,7 +111,7 @@ class GameController {
         const currentPlayerHealth = this.getHealth("player");
         const currentMonsterHealth = this.getHealth("monster");
         if (currentPlayerHealth !== 0 && currentMonsterHealth !== 0) return;
-        let status = currentPlayerHealth === monsterHealth ? "draw" : currentPlayerHealth > 0 ? "win" : "lose";
+        let status = currentPlayerHealth === currentMonsterHealth ? "draw" : currentPlayerHealth > 0 ? "win" : "lose";
         this.GameOver(status);
     }
 }
