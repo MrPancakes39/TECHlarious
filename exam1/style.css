@@ -82,6 +82,7 @@ header {
     text-transform: uppercase;
     outline: transparent;
     box-shadow: 0px 5px 5px #ddd;
+    cursor: pointer;
 }
 
 #battle-log {
