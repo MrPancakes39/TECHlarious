@@ -1,6 +1,5 @@
-const randint = (min, max) => {
-    Math.random() * (max - min) + min;
-};
+const randint = (min, max) => Math.random() * (max - min) + min;
+const clamp = (val, min, max) => Math.min(Math.max(min, val), max);
 
 // `<span class="monster">Monster</span>`;
 // `<span class="player">Player</span>`;
@@ -8,14 +7,24 @@ const randint = (min, max) => {
 // `<span class="gain">17</span>`;
 
 class GameController {
-    #battleLog;
+    battleLog;
+    playerHealth;
+    monsterHealth;
 
     constructor() {
-        this.#battleLog = document.querySelector("#battle-log");
-        document.querySelectorAll(".action-btn").forEach((btn) => btn.addEventListener("click", this.#doAction));
+        this.monsterHealth = document.querySelector("#monster-health");
+        this.playerHealth = document.querySelector("#player-health");
+        this.battleLog = document.querySelector("#battle-log");
+        document.querySelectorAll(".action-btn").forEach((btn) => btn.addEventListener("click", this.doAction));
     }
 
-    #doAction(event) {
+    setHealth(type, value) {
+        const health = type === "monster" ? this.monsterHealth : this.playerHealth;
+        value = clamp(value, 0, 100);
+        health.style.width = `${value}%`;
+    }
+
+    doAction(event) {
         const btn = event.target;
         switch (btn.getAttribute("id")) {
             case "atk":
