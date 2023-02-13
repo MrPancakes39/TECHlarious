@@ -17,6 +17,7 @@ const startOver = document.querySelector("#start-over");
 class GameController {
     valueRange;
     specialValueRange;
+    currentHeal = 3;
 
     constructor(valueRange = { min: 5, max: 20 }, specialValueRange = { min: 12, max: 25 }) {
         this.valueRange = valueRange;
@@ -50,20 +51,27 @@ class GameController {
 
     doAction(event) {
         const btn = event.target;
+        let worked = false;
+        console.log(this.currentHeal);
         switch (btn.getAttribute("id")) {
             case "atk":
-                this.doAttack("player");
+                worked = this.doAttack("player");
+                this.currentHeal = 3;
                 break;
             case "sp-atk":
-                this.doSpecial();
+                worked = this.doSpecial();
+                this.currentHeal = 3;
                 break;
             case "heal":
+                worked = this.doHeal();
                 break;
             case "give-up":
                 break;
         }
-        this.doAttack("monster");
-        this.checkWinner();
+        if (worked) {
+            this.doAttack("monster");
+            this.checkWinner();
+        }
     }
 
     doAttack(type) {
@@ -73,6 +81,7 @@ class GameController {
         const message = this.logMessage(type, "attacks and deals", damage, false);
         this.setHealth(opponentType, opponentHealth - damage);
         battleLog.prepend(html(`<p>${message}</p>`));
+        return true;
     }
 
     doSpecial() {
@@ -85,9 +94,28 @@ class GameController {
             const message = this.logMessage("player", "attacks and deals", damage, false);
             this.setHealth("monster", currentMonsterHealth - damage);
             battleLog.prepend(html(`<p>${message}</p>`));
-        } else {
-            battleLog.prepend(html(`<p>You can't use the special attack, it's for emergencies.</p>`));
+            return true;
         }
+        battleLog.prepend(html(`<p>You can't use the special attack, it's for emergencies.</p>`));
+        return false;
+    }
+
+    doHeal() {
+        const currentPlayerHealth = this.getHealth("player");
+        if (currentPlayerHealth === 100) {
+            battleLog.prepend(html(`<p>You are at a 100 health, already! You can't heal.</p>`));
+            return false;
+        }
+        if (this.currentHeal) {
+            this.currentHeal--;
+            const health = randint(this.specialValueRange.min, this.specialValueRange.max);
+            const message = this.logMessage("player", "heals themselves for", health, true);
+            this.setHealth("player", currentPlayerHealth + health);
+            battleLog.prepend(html(`<p>${message}</p>`));
+            return true;
+        }
+        battleLog.prepend(html(`<p>You healed 3 times, already! Attack instead.</p>`));
+        return false;
     }
 
     GameOver(status) {
