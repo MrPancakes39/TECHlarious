@@ -12,12 +12,17 @@ const playerHealth = document.querySelector("#player-health");
 const monsterHealth = document.querySelector("#monster-health");
 const actionsCard = document.querySelector(".actions");
 const gameOverInfo = document.querySelector("#game-status .card--info");
+const startOver = document.querySelector("#start-over");
 
 class GameController {
     damageRange;
 
     constructor(damageRange = { min: 5, max: 20 }) {
         this.damageRange = damageRange;
+        battleLog.innerHTML = "";
+        this.setHealth("player", 100);
+        this.setHealth("monster", 100);
+        actionsCard.dataset.hidden = "false";
     }
 
     opposite(type) {
@@ -68,7 +73,7 @@ class GameController {
         if (type === "player") this.doAttack("monster");
     }
 
-    setGameStatus(status) {
+    GameOver(status) {
         let info = "";
         switch (status) {
             case "win":
@@ -90,7 +95,7 @@ class GameController {
         const currentMonsterHealth = this.getHealth("monster");
         if (currentPlayerHealth !== 0 && currentMonsterHealth !== 0) return;
         let status = currentPlayerHealth === monsterHealth ? "draw" : currentPlayerHealth > 0 ? "win" : "lose";
-        this.setGameStatus(status);
+        this.GameOver(status);
     }
 }
 
@@ -99,3 +104,5 @@ controller = new GameController();
 document
     .querySelectorAll(".action-btn")
     .forEach((btn) => btn.addEventListener("click", controller.doAction.bind(controller)));
+
+startOver.addEventListener("click", () => (controller = new GameController()));
