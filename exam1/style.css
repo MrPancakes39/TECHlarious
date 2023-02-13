@@ -83,3 +83,23 @@ header {
     outline: transparent;
     box-shadow: 0px 5px 5px #ddd;
 }
+
+#battle-log {
+    text-align: center;
+}
+
+#battle-log .monster {
+    color: #da8d00;
+}
+
+#battle-log .player {
+    color: #7700ff;
+}
+
+#battle-log .loss {
+    color: #ff0000;
+}
+
+#battle-log .gain {
+    color: #008001;
+}
