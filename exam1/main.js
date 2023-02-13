@@ -10,12 +10,20 @@ class GameController {
     battleLog;
     playerHealth;
     monsterHealth;
+    damageRange;
 
-    constructor() {
+    constructor(damageRange = { min: 1, max: 20 }) {
+        this.damageRange = damageRange;
         this.monsterHealth = document.querySelector("#monster-health");
         this.playerHealth = document.querySelector("#player-health");
         this.battleLog = document.querySelector("#battle-log");
-        document.querySelectorAll(".action-btn").forEach((btn) => btn.addEventListener("click", this.doAction));
+        document
+            .querySelectorAll(".action-btn")
+            .forEach((btn) => btn.addEventListener("click", this.doAction.bind(this)));
+    }
+
+    opposite(type) {
+        return type === "monster" ? "player" : "monster";
     }
 
     setHealth(type, value) {
@@ -39,6 +47,7 @@ class GameController {
         const btn = event.target;
         switch (btn.getAttribute("id")) {
             case "atk":
+                this.doAttack("player");
                 break;
             case "sp-atk":
                 break;
@@ -47,6 +56,17 @@ class GameController {
             case "give-up":
                 break;
         }
+    }
+
+    doAttack(type) {
+        const opponentType = this.opposite(type);
+        const opponentHealth = this.getHealth(opponentType);
+        const damage = randint(this.damageRange.min, this.damageRange.max);
+        const message = this.logMessage(type, "attacks and deals", damage, false);
+        this.setHealth(opponentType, opponentHealth - damage);
+        this.battleLog.prepend(html(`<p>${message}</p>`));
+
+        if (type === "player") this.doAttack("monster");
     }
 }
 
