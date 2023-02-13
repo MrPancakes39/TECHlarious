@@ -52,7 +52,6 @@ class GameController {
     doAction(event) {
         const btn = event.target;
         let worked = false;
-        console.log(this.currentHeal);
         switch (btn.getAttribute("id")) {
             case "atk":
                 worked = this.doAttack("player");
@@ -66,6 +65,7 @@ class GameController {
                 worked = this.doHeal();
                 break;
             case "give-up":
+                this.doGiveUp();
                 break;
         }
         if (worked) {
@@ -116,6 +116,12 @@ class GameController {
         }
         battleLog.prepend(html(`<p>You healed 3 times, already! Attack instead.</p>`));
         return false;
+    }
+
+    doGiveUp() {
+        let response = prompt("Are you sure you want to give up? [y/N]:");
+        response = response?.toLowerCase().trim();
+        if (response === "yes" || response === "y") this.GameOver("lose");
     }
 
     GameOver(status) {
