@@ -13,6 +13,7 @@ body,
     flex-direction: column;
     align-items: center;
     font-family: "Rubik", sans-serif;
+    gap: 2rem;
 }
 
 header {
@@ -21,4 +22,49 @@ header {
     background-color: #880018;
     text-align: center;
     font-weight: bold;
+    padding: 1rem;
+}
+
+.card {
+    --progressbar-height: 2.5rem;
+    width: 35rem;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px #ddd, 0 0px 6px #d5d5d5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.card--title {
+    margin: 0;
+    color: #000;
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card--progressbar {
+    flex-grow: 1;
+    height: var(--progressbar-height);
+    background-color: #fde5e5;
+    border: 1px solid #000;
+}
+
+.card--progressbar > .progress {
+    width: 100%;
+    height: var(--progressbar-height);
+    background-color: #04a876;
+}
+
+.card.player {
+    margin-block-start: -0.25rem;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem 1rem;
 }

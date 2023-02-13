@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monster Game</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -15,6 +15,18 @@
     <header>
       <h1 class="title">Kill The Monster</h1>
     </header>
+    <div class="card">
+      <p class="card--title">Monster Health</p>
+      <div class="card--progressbar">
+        <div class="progress" id="monster-health"></div>
+      </div>
+    </div>
+    <div class="card player">
+      <p class="card--title">Your Health</p>
+      <div class="card--progressbar">
+        <div class="progress" id="player-health"></div>
+      </div>
+    </div>
   </div>
   <script src="main.js"></script>
 </body>
