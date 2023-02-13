@@ -6,11 +6,6 @@ const html = (string) => {
     return t.firstElementChild;
 };
 
-// `<span class="monster">Monster</span>`;
-// `<span class="player">Player</span>`;
-// `<span class="loss">12</span>`;
-// `<span class="gain">17</span>`;
-
 class GameController {
     battleLog;
     playerHealth;
@@ -32,6 +27,12 @@ class GameController {
     getHealth(type) {
         const health = type === "monster" ? this.monsterHealth : this.playerHealth;
         return parseInt(health.style.width);
+    }
+
+    logMessage(type, message, amount, isGain) {
+        const who = type === "monster" ? `<span class="monster">Monster</span>` : `<span class="player">Player</span>`;
+        const number = `<span class="${isGain ? "gain" : "loss"}">${amount}</span>`;
+        return `${who} ${message} ${number}`;
     }
 
     doAction(event) {
