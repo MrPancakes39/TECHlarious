@@ -27,11 +27,16 @@
         <div class="progress" id="player-health" style="width: 100%;"></div>
       </div>
     </div>
-    <div class="actions">
+    <div class="actions" data-hidden="true">
       <button class="action-btn" id="atk">Attack</button>
       <button class="action-btn" id="sp-atk">Special Attack</button>
       <button class="action-btn" id="heal">Heal</button>
       <button class="action-btn" id="give-up">Give up</button>
+    </div>
+    <div class="card" id="game-status">
+      <p class="card--title">Game Over!</p>
+      <p class="card--info">You won!</p>
+      <button id="start-over">Start New Game</button>
     </div>
     <div class="card">
       <p class="card--title">Battle Log</p>
