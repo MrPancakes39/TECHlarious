@@ -15,10 +15,10 @@ const gameOverInfo = document.querySelector("#game-status .card--info");
 const startOver = document.querySelector("#start-over");
 
 class GameController {
-    damageRange;
+    valueRange;
 
-    constructor(damageRange = { min: 5, max: 20 }) {
-        this.damageRange = damageRange;
+    constructor(valueRange = { min: 5, max: 20 }) {
+        this.valueRange = valueRange;
         battleLog.innerHTML = "";
         this.setHealth("player", 100);
         this.setHealth("monster", 100);
@@ -65,7 +65,7 @@ class GameController {
     doAttack(type) {
         const opponentType = this.opposite(type);
         const opponentHealth = this.getHealth(opponentType);
-        const damage = randint(this.damageRange.min, this.damageRange.max);
+        const damage = randint(this.valueRange.min, this.valueRange.max);
         const message = this.logMessage(type, "attacks and deals", damage, false);
         this.setHealth(opponentType, opponentHealth - damage);
         battleLog.prepend(html(`<p>${message}</p>`));
