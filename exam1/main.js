@@ -16,9 +16,11 @@ const startOver = document.querySelector("#start-over");
 
 class GameController {
     valueRange;
+    specialValueRange;
 
-    constructor(valueRange = { min: 5, max: 20 }) {
+    constructor(valueRange = { min: 5, max: 20 }, specialValueRange = { min: 12, max: 25 }) {
         this.valueRange = valueRange;
+        this.specialValueRange = specialValueRange;
         battleLog.innerHTML = "";
         this.setHealth("player", 100);
         this.setHealth("monster", 100);
@@ -53,6 +55,7 @@ class GameController {
                 this.doAttack("player");
                 break;
             case "sp-atk":
+                this.doSpecial();
                 break;
             case "heal":
                 break;
@@ -71,6 +74,23 @@ class GameController {
         battleLog.prepend(html(`<p>${message}</p>`));
 
         if (type === "player") this.doAttack("monster");
+    }
+
+    doSpecial() {
+        const currentPlayerHealth = this.getHealth("player");
+        const currentMonsterHealth = this.getHealth("monster");
+        const startOfGame = currentPlayerHealth === currentMonsterHealth && currentPlayerHealth === 100;
+        const playerLess20 = currentPlayerHealth <= currentMonsterHealth - 20;
+        if (startOfGame || playerLess20) {
+            const damage = randint(this.specialValueRange.min, this.specialValueRange.max);
+            const message = this.logMessage("player", "attacks and deals", damage, false);
+            this.setHealth("monster", currentMonsterHealth - damage);
+            battleLog.prepend(html(`<p>${message}</p>`));
+
+            this.doAttack("monster");
+        } else {
+            battleLog.prepend(html(`<p>You can't use the special attack, it's for emergencies.</p>`));
+        }
     }
 
     GameOver(status) {
