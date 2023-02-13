@@ -54,6 +54,7 @@ class GameController {
             case "give-up":
                 break;
         }
+        this.checkWinner();
     }
 
     doAttack(type) {
@@ -82,6 +83,14 @@ class GameController {
         }
         actionsCard.dataset.hidden = "true";
         gameOverInfo.textContent = info;
+    }
+
+    checkWinner() {
+        const currentPlayerHealth = this.getHealth("player");
+        const currentMonsterHealth = this.getHealth("monster");
+        if (currentPlayerHealth !== 0 && currentMonsterHealth !== 0) return;
+        let status = currentPlayerHealth === monsterHealth ? "draw" : currentPlayerHealth > 0 ? "win" : "lose";
+        this.setGameStatus(status);
     }
 }
 
