@@ -24,6 +24,11 @@ class GameController {
         health.style.width = `${value}%`;
     }
 
+    getHealth(type) {
+        const health = type === "monster" ? this.monsterHealth : this.playerHealth;
+        return parseInt(health.style.width);
+    }
+
     doAction(event) {
         const btn = event.target;
         switch (btn.getAttribute("id")) {
