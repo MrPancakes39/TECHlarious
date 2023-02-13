@@ -1,5 +1,10 @@
 const randint = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
 const clamp = (val, min, max) => Math.min(Math.max(min, val), max);
+const html = (string) => {
+    let t = document.createElement("div");
+    t.innerHTML = string;
+    return t.firstElementChild;
+};
 
 // `<span class="monster">Monster</span>`;
 // `<span class="player">Player</span>`;
