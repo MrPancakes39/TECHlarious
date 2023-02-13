@@ -10,6 +10,8 @@ class GameController {
     battleLog;
     playerHealth;
     monsterHealth;
+    actionsCard;
+    gameOverInfo;
     damageRange;
 
     constructor(damageRange = { min: 5, max: 20 }) {
@@ -17,6 +19,8 @@ class GameController {
         this.monsterHealth = document.querySelector("#monster-health");
         this.playerHealth = document.querySelector("#player-health");
         this.battleLog = document.querySelector("#battle-log");
+        this.actionsCard = document.querySelector(".actions");
+        this.gameOverInfo = document.querySelector("#game-status .card--info");
         document
             .querySelectorAll(".action-btn")
             .forEach((btn) => btn.addEventListener("click", this.doAction.bind(this)));
@@ -67,6 +71,23 @@ class GameController {
         this.battleLog.prepend(html(`<p>${message}</p>`));
 
         if (type === "player") this.doAttack("monster");
+    }
+
+    setGameStatus(status) {
+        let info = "";
+        switch (status) {
+            case "win":
+                info = "You win!";
+                break;
+            case "lose":
+                info = "You lost :(";
+                break;
+            case "draw":
+                info = "It's a draw!";
+                break;
+        }
+        this.actionsCard.dataset.hidden = "true";
+        this.gameOverInfo.textContent = info;
     }
 }
 
