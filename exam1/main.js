@@ -6,24 +6,18 @@ const html = (string) => {
     return t.firstElementChild;
 };
 
+// DOM
+const battleLog = document.querySelector("#battle-log");
+const playerHealth = document.querySelector("#player-health");
+const monsterHealth = document.querySelector("#monster-health");
+const actionsCard = document.querySelector(".actions");
+const gameOverInfo = document.querySelector("#game-status .card--info");
+
 class GameController {
-    battleLog;
-    playerHealth;
-    monsterHealth;
-    actionsCard;
-    gameOverInfo;
     damageRange;
 
     constructor(damageRange = { min: 5, max: 20 }) {
         this.damageRange = damageRange;
-        this.monsterHealth = document.querySelector("#monster-health");
-        this.playerHealth = document.querySelector("#player-health");
-        this.battleLog = document.querySelector("#battle-log");
-        this.actionsCard = document.querySelector(".actions");
-        this.gameOverInfo = document.querySelector("#game-status .card--info");
-        document
-            .querySelectorAll(".action-btn")
-            .forEach((btn) => btn.addEventListener("click", this.doAction.bind(this)));
     }
 
     opposite(type) {
@@ -31,13 +25,13 @@ class GameController {
     }
 
     setHealth(type, value) {
-        const health = type === "monster" ? this.monsterHealth : this.playerHealth;
+        const health = type === "monster" ? monsterHealth : playerHealth;
         value = clamp(value, 0, 100);
         health.style.width = `${value}%`;
     }
 
     getHealth(type) {
-        const health = type === "monster" ? this.monsterHealth : this.playerHealth;
+        const health = type === "monster" ? monsterHealth : playerHealth;
         return parseInt(health.style.width);
     }
 
@@ -68,7 +62,7 @@ class GameController {
         const damage = randint(this.damageRange.min, this.damageRange.max);
         const message = this.logMessage(type, "attacks and deals", damage, false);
         this.setHealth(opponentType, opponentHealth - damage);
-        this.battleLog.prepend(html(`<p>${message}</p>`));
+        battleLog.prepend(html(`<p>${message}</p>`));
 
         if (type === "player") this.doAttack("monster");
     }
@@ -86,9 +80,13 @@ class GameController {
                 info = "It's a draw!";
                 break;
         }
-        this.actionsCard.dataset.hidden = "true";
-        this.gameOverInfo.textContent = info;
+        actionsCard.dataset.hidden = "true";
+        gameOverInfo.textContent = info;
     }
 }
 
 controller = new GameController();
+
+document
+    .querySelectorAll(".action-btn")
+    .forEach((btn) => btn.addEventListener("click", controller.doAction.bind(controller)));
